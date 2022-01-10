@@ -24,6 +24,7 @@ public class ServerHandlerOut extends ChannelOutboundHandlerAdapter {
     @Override
     public void connect(ChannelHandlerContext ctx, SocketAddress remoteAddress, SocketAddress localAddress, ChannelPromise promise) throws Exception {
         super.connect(ctx, remoteAddress, localAddress, promise);
+        log.info("=======================>"+ctx.name());
     }
 
     @Override
