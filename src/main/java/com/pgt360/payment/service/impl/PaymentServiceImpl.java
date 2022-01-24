@@ -1,17 +1,17 @@
 package com.pgt360.payment.service.impl;
 
-import com.pgt360.payment.netty.domain.ChannelRepository;
+import com.pgt360.payment.client.config.NettyInitializer;
+import com.pgt360.payment.client.handler.NettyHandlerIn;
 import com.pgt360.payment.service.PaymentService;
 import com.pgt360.payment.service.dto.payment.ResponseDto;
-import com.pgt360.payment.util.NettyUtil;
-import io.netty.channel.ChannelHandler;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class PaymentServiceImpl implements PaymentService {
+
     @Override
     public ResponseDto payChipSingleCommerce(Double pAmount) {
         return null;
@@ -53,14 +53,17 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public ResponseDto initDevice(Integer pConfirm) {
+    public ResponseDto initDevice(int pConfirm) {
         log.info("Inicialización de Pos");
         if(pConfirm != 1) {
             log.info("Inicialización no autorizada");
         } else {
             String hex = "02001736303030303030303030313030323030300321";
-            String send = NettyUtil.bytesToHex(hex.getBytes());
+            //String send = NettyUtil.bytesToHex(hex.getBytes());
+            NettyHandlerIn.sendMessage(hex);
         }
-        return new ResponseDto();
+        ResponseDto responseDto = new ResponseDto();
+        responseDto.setNombre("Israel");
+        return responseDto;
     }
 }

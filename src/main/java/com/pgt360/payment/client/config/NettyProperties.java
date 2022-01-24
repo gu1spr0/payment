@@ -1,4 +1,4 @@
-package com.pgt360.payment.netty.config;
+package com.pgt360.payment.client.config;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +13,10 @@ import javax.validation.constraints.Size;
 @ConfigurationProperties(prefix = "netty")
 public class NettyProperties {
     @NotNull
+    @Size(min = 9, max = 15)
+    private String host;
+
+    @NotNull
     @Size(min = 1000, max = 65535)
     private int tcpPort;
 
@@ -21,12 +25,5 @@ public class NettyProperties {
     private int bossCount;
 
     @NotNull
-    @Min(2)
-    private int workerCount;
-
-    @NotNull
     private boolean keepAlive;
-
-    @NotNull
-    private int backlog;
 }

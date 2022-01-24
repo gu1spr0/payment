@@ -1,6 +1,6 @@
 package com.pgt360.payment;
 
-import com.pgt360.payment.netty.netty.TCPServer;
+import com.pgt360.payment.client.TcpServer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -15,8 +15,7 @@ public class PaymentApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PaymentApplication.class, args);
 	}
-	private final TCPServer tcpServer;
-
+	private final TcpServer tcpServer;
 	@Bean
 	public ApplicationListener<ApplicationReadyEvent> readyEventApplicationListener(){
 		return new ApplicationListener<ApplicationReadyEvent>() {

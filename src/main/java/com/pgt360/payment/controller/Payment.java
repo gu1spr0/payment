@@ -79,7 +79,7 @@ public class Payment {
     @ApiOperation(value = "Inicializar dispositivo", authorizations = @Authorization(value = "Bearer"))
     @GetMapping(path = "/init/{confirm}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseDto initDevice(@PathVariable(value = "confirm", required = true) Integer confirm){
+    public ResponseDto initDevice(@PathVariable(value = "confirm", required = true) int confirm){
         return this.paymentService.initDevice(confirm);
     }
 }
