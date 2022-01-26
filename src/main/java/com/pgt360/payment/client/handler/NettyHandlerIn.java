@@ -32,22 +32,22 @@ public class NettyHandlerIn extends ChannelInboundHandlerAdapter {
         String text = buf.toString(Charset.defaultCharset());   // (3)
         System.out.println("El mensaje recibido del servidor es:"+text);
         buf.release(); // (4)
-        this.sendMessage("06");
+        //this.sendMessage("06");
     }
 
     public static void sendMessage(String msg) {  // (4)
         if (ctx == null)
             return;
         try{
-            StringBuffer sb = new StringBuffer();
+            /*StringBuffer sb = new StringBuffer();
             char ch[] = msg.toCharArray();
             for(int i=0;i<ch.length;i++){
                 String hexString = Integer.toHexString(ch[i]);
                 sb.append(hexString);
-            }
-            String result = sb.toString();
+            }*/
+            //String result = sb.toString();
             ByteBuf buf = ctx.alloc().buffer();  // (5)
-            buf.writeCharSequence(result, Charset.defaultCharset());
+            buf.writeCharSequence(msg, Charset.defaultCharset());
             ctx.writeAndFlush(buf).sync();
         /*ctx.write(buf);
         ctx.flush();*/

@@ -58,9 +58,9 @@ public class PaymentServiceImpl implements PaymentService {
         if(pConfirm != 1) {
             log.info("Inicialización no autorizada");
         } else {
-            String hex = "02001736303030303030303030313030323030300321";
+            //String hex = "02001736303030303030303030313030323030300321";
             //String send = NettyUtil.bytesToHex(hex.getBytes());
-            NettyHandlerIn.sendMessage(hex);
+            NettyHandlerIn.sendMessage("1");
         }
         ResponseDto responseDto = new ResponseDto();
         responseDto.setNombre("Israel");
