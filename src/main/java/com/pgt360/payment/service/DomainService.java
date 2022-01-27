@@ -1,4 +1,4 @@
 package com.pgt360.payment.service;
 
-public interface DeviceService {
+public interface DomainService {
 }

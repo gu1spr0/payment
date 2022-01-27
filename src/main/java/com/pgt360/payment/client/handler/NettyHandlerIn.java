@@ -1,5 +1,6 @@
 package com.pgt360.payment.client.handler;
 
+import com.pgt360.payment.service.dto.flow.FlowQueryDto;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
@@ -7,6 +8,7 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.util.SerializationUtils;
 
 import java.nio.charset.Charset;
 
@@ -35,7 +37,7 @@ public class NettyHandlerIn extends ChannelInboundHandlerAdapter {
         //this.sendMessage("06");
     }
 
-    public static void sendMessage(String msg) {  // (4)
+    public static void sendMessage(FlowQueryDto pFlowQueryDto) {  // (4)
         if (ctx == null)
             return;
         try{
@@ -46,12 +48,16 @@ public class NettyHandlerIn extends ChannelInboundHandlerAdapter {
                 sb.append(hexString);
             }*/
             //String result = sb.toString();
-            ByteBuf buf = ctx.alloc().buffer();  // (5)
-            buf.writeCharSequence(msg, Charset.defaultCharset());
-            ctx.writeAndFlush(buf).sync();
-        /*ctx.write(buf);
-        ctx.flush();*/
 
+            /**********************ENVIO SENCILLO*******************
+            ByteBuf buf = ctx.alloc().buffer();  // (5)
+            buf.writeCharSequence(pFlowQueryDto, Charset.defaultCharset());
+            ctx.writeAndFlush(buf).sync();
+             *******************************************/
+            byte[] data = SerializationUtils.serialize(pFlowQueryDto);
+            ByteBuf buf = ctx.alloc().buffer();
+            buf.writeBytes(data);
+            ctx.writeAndFlush(buf).sync();
         }catch (InterruptedException ie){
             ie.getStackTrace().toString();
         }

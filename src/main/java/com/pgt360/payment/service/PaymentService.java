@@ -11,5 +11,5 @@ public interface PaymentService {
     ResponseDto cancelTransactionMultiCommerce(String pTransaction, Integer pCommerceId);
     ResponseDto closeSingleCommerce(Integer pConfirm);
     ResponseDto closeMultiCommerce(Integer pConfirm, Integer pCommerceId);
-    ResponseDto initDevice(int pConfirm);
+    ResponseDto initDevice(Integer pCommerceId, Integer pConfirm);
 }
